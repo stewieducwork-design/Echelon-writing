@@ -1745,6 +1745,69 @@ body::before{
 .cmt-edit-orig{ font-size:.9rem; color:var(--ink-2); margin-bottom:12px; }
 .cmt-edit-orig del{ color:var(--red); }
 
+/* ================================================================
+   35b. ART NOUVEAU — khung vàng + hoạ tiết cho MỌI màn học sinh
+   (vòm cong, dây leo, mão hoa, viền vàng lồng khung). KHÔNG đụng
+   màn thi #screen-exam để giữ vẻ thật của IELTS.
+   ================================================================ */
+:root{ --gold:#c1841a; --gold-soft:color-mix(in srgb, #c1841a 42%, transparent); }
+
+/* dây leo vàng mờ ở hai góc trang (khung trang trí) */
+.sheet__body, .learn__body{
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke='%23c1841a' stroke-width='1.4' stroke-linecap='round' opacity='.45'%3E%3Cpath d='M8 8 C8 60 40 40 44 84 C46 108 30 104 34 132'/%3E%3Cpath d='M44 84 C64 80 64 58 86 60'/%3E%3Cpath d='M34 40 C54 40 52 22 74 24'/%3E%3C/g%3E%3Ccircle cx='86' cy='60' r='3' fill='%23c1841a' opacity='.45'/%3E%3Ccircle cx='74' cy='24' r='3' fill='%23c1841a' opacity='.45'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke='%23c1841a' stroke-width='1.4' stroke-linecap='round' opacity='.45' transform='translate(150,150) rotate(180)'%3E%3Cpath d='M8 8 C8 60 40 40 44 84 C46 108 30 104 34 132'/%3E%3Cpath d='M44 84 C64 80 64 58 86 60'/%3E%3Cpath d='M34 40 C54 40 52 22 74 24'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat:no-repeat, no-repeat;
+  background-position:top 70px left 8px, bottom 24px right 8px;
+}
+
+/* khung vàng lồng trong các thẻ chính */
+.paper-card, .sheet__card, .hub-card{ position:relative; }
+.paper-card::after, .sheet__card::after, .hub-card::after{
+  content:""; position:absolute; inset:8px; pointer-events:none; border-radius:14px;
+  border:1px solid var(--gold-soft);
+}
+
+/* mão hoa ở đỉnh thẻ nhập mã / đăng ký / tài khoản */
+.paper-card__top{ position:relative; padding-top:22px; }
+.paper-card__top::before{
+  content:""; position:absolute; top:-4px; left:50%; transform:translateX(-50%);
+  width:128px; height:26px; pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 26'%3E%3Cg fill='none' stroke='%23c1841a' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M64 25 V9'/%3E%3Cpath d='M64 13 C49 13 53 3 37 6'/%3E%3Cpath d='M64 13 C79 13 75 3 91 6'/%3E%3Cpath d='M37 6 q-8 0 -13 -5'/%3E%3Cpath d='M91 6 q8 0 13 -5'/%3E%3C/g%3E%3Ccircle cx='64' cy='7' r='2.6' fill='%23c1841a'/%3E%3C/svg%3E") no-repeat center;
+}
+
+/* hoạ tiết whiplash dưới MỌI tiêu đề học sinh */
+.learn__head{ position:relative; }
+.learn__head::after{
+  content:""; display:block; height:22px; margin:14px 0 2px; width:210px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 210 24'%3E%3Cg fill='none' stroke='%23c1841a' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M105 12 C74 12 82 2 64 6 C51 9 60 19 44 14'/%3E%3Cpath d='M105 12 C136 12 128 2 146 6 C159 9 150 19 166 14'/%3E%3Cpath d='M44 14 q-7 -1 -12 -8'/%3E%3Cpath d='M166 14 q7 -1 12 -8'/%3E%3C/g%3E%3Ccircle cx='105' cy='12' r='2.6' fill='%23c1841a'/%3E%3C/svg%3E") no-repeat left center;
+}
+[data-theme="dark"] .learn__head::after,
+[data-theme="dark"] .paper-card__top::before,
+[data-theme="dark"] .sheet__body, [data-theme="dark"] .learn__body{ filter:brightness(1.2); }
+
+/* thẻ chọn (hub tiles): đỉnh bo vòm + viền vàng lồng */
+.pick{ position:relative; border-radius:22px 22px 8px 8px !important; }
+.pick::after{
+  content:""; position:absolute; inset:6px; pointer-events:none; border-radius:17px 17px 6px 6px;
+  border:1px solid var(--gold-soft); transition:border-color .15s;
+}
+.pick:hover::after, .pick:focus-visible::after{ border-color:var(--gold); }
+
+/* eyebrow kiểu Art Nouveau: hai viên kim cương vàng hai bên */
+.eyebrow{ display:inline-flex; align-items:center; gap:9px; }
+.eyebrow::before, .eyebrow::after{
+  content:""; width:16px; height:1px; background:var(--gold-soft);
+}
+.eyebrow::before{ box-shadow:14px 0 0 -3px var(--gold); }
+.eyebrow::after{ box-shadow:-14px 0 0 -3px var(--gold); }
+
+/* thanh điều hướng không tràn ngang trên máy hẹp */
+@media (max-width:440px){
+  .sheet__nav, .learn__nav, .result__nav, .lp-nav{ flex-wrap:wrap; row-gap:8px; }
+  .sheet__body, .learn__body{ background-size:96px auto, 96px auto; }
+}
+
 </style>
 </head>
 <body>
@@ -3069,24 +3132,34 @@ const SECURITY_RULES =
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Only this signed-in email may read the full list of scripts
-    // and edit tests. Change it to YOUR teacher login.
+    // Only this signed-in email may read the full list of scripts,
+    // mark them, and edit tests. Change it to YOUR teacher login.
     function isTeacher() {
       return request.auth != null
         && request.auth.token.email == "YOUR_TEACHER_EMAIL@example.com";
     }
 
+    // Papers, lessons and library material: students read, teacher writes.
     match /tests/{code} {
-      allow get: if true;                      // students load the paper
-      allow list: if true;                     // students list mocks + lessons
+      allow get, list: if true;
       allow create, update, delete: if isTeacher();
     }
 
+    // Student accounts: each signed-in student manages only their own
+    // profile document; the teacher may see the roster.
+    match /students/{uid} {
+      allow get: if true;
+      allow create, update: if request.auth != null && request.auth.uid == uid;
+      allow list, delete: if isTeacher();
+    }
+
+    // Submissions: ANY student may hand in a script (including own-prompt
+    // practice); the teacher marks and reads every one; a student re-opens
+    // their own result by its id.
     match /submissions/{id} {
-      allow get: if true;                      // a student opens only their own result link
+      allow get: if true;
       allow list, update, delete: if isTeacher();
-      allow create: if request.resource.data.testCode is string
-        && exists(/databases/$(database)/documents/tests/$(request.resource.data.testCode));
+      allow create: if request.resource.data.testCode is string;
     }
   }
 }`;
@@ -3755,15 +3828,22 @@ async function finalize(auto){
     MyHistory.record(id, sub);
   }catch(e){
     console.error("submit failed", e);
-    // keep the session so the student can retry
-    s.submitted = false; saveSession();
+    // KHÔNG để mất bài: lưu ngay trên máy này + ghi vào lịch sử thiết bị,
+    // để học sinh vẫn xem lại được. (Thường lỗi là do security rules chưa
+    // cập nhật nên chưa gửi lên máy chủ cho giáo viên.)
+    const localId = "local-" + uid();
+    try{ const all = lsGet(LS.subsLocal, []); all.push(Object.assign({id:localId, _pending:true}, sub)); lsSet(LS.subsLocal, all); }catch(_){}
+    try{ MyHistory.record(localId, sub); }catch(_){}
+    Receipts.add(s.code, localId);
     updateSaveDot("saved");
-    await dialog({title:"Couldn't submit", body:
-      `<p>Your work is still saved on this device, but Echelon Prep couldn't send it to your teacher. This is usually a connection problem.</p>
-       <p>Check your internet and press Submit again. Your answers and remaining time are unchanged.</p>`,
-      actions:[{label:"OK", primary:true, value:true}]});
-    // restart timer if there is time left
-    if(Date.now() < s.endAtMs) startTimer();
+    lsDel(LS.session);
+    App.session = null;
+    await dialog({title:"Đã lưu bài trên máy này", body:
+      `<p>Bài của bạn <b>đã được lưu trên thiết bị này</b> — bạn có thể mở xem lại bất cứ lúc nào ở mục “Xem bài tôi đã làm trên máy này”.</p>
+       <p style="color:var(--ink-2);margin-top:8px">Chỉ có điều bài <b>chưa gửi được lên máy chủ</b> cho giáo viên. Việc này gần như luôn do <b>security rules của Firestore chưa được cập nhật</b>. Nhờ giáo viên dán lại bộ rules mới (trong phần cài đặt) rồi thử nộp lại nhé.</p>`,
+      actions:[{label:"Xem bài của tôi", primary:true, value:true}]});
+    const display = Object.assign({id:localId}, sub);
+    renderResult(display, true);
     return;
   }
   lsDel(LS.session);
