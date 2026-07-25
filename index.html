@@ -837,6 +837,17 @@ body.dragging .xpanel{ pointer-events:none; }
   .pr-table th{ background:#eee; font-size:8.5pt; text-transform:uppercase; letter-spacing:.05em; }
   .pr-essay{ white-space:pre-wrap; border:1px solid #999; padding:11px 13px; font-size:10.5pt; line-height:1.6; }
   .pr-note{ white-space:pre-wrap; }
+  .pr-annot{ display:grid; grid-template-columns:34mm 1fr; gap:9px; align-items:start; }
+  .pr-annot__margin{ font-size:8pt; line-height:1.35; }
+  .pr-cmt{ display:flex; gap:4px; break-inside:avoid; margin-bottom:7px; padding-bottom:6px; border-bottom:1px dotted #bbb; }
+  .pr-cmt__n{ flex:none; width:14px; height:14px; border-radius:50%; background:#000; color:#fff; font-size:7pt; display:inline-flex; align-items:center; justify-content:center; }
+  .pr-cmt__b del{ color:#666; } .pr-cmt__b b{ color:#000; }
+  .pr-cmt__empty{ color:#888; font-style:italic; }
+  .pr-essay--annot{ white-space:normal; }
+  .pr-essay--annot .cmt-span{ background:#f4ecda; border-bottom:1px solid #b98f2a; }
+  .pr-essay--annot .cmt-del{ color:#a01f1f; text-decoration:line-through; }
+  .pr-essay--annot .cmt-ins{ color:#0a6b52; font-weight:700; }
+  .pr-essay--annot .cmt-num{ font-size:7pt; color:#a05a00; vertical-align:super; }
   .pr-break{ page-break-before:always; }
   .pr-foot{ margin-top:22px; border-top:1px solid #999; padding-top:6px; font-size:8.5pt; color:#555; }
 }
@@ -1579,6 +1590,161 @@ body::before{
   .lk-lessons{ grid-template-columns:1fr; }
 }
 
+/* ================================================================
+   33b. ART NOUVEAU — hoạ tiết + BẠN ĐỒNG HÀNH (thú cưng biết đi)
+   Bảng màu mượn nguyên bộ "ink wash" đang có (mực petrol, jade,
+   marigold trên nền alabaster) vì nó vốn đã rất Art Nouveau; phần
+   thêm ở đây là ĐƯỜNG NÉT: vòm cong, dây leo, trăng, viền vàng.
+   Chỉ áp cho hub + màn hình bạn đồng hành — KHÔNG đụng màn thi.
+   ================================================================ */
+
+/* --- hoạ tiết whiplash dưới tiêu đề (dùng lại được) --- */
+.learn__head--nouveau{ position:relative; }
+.learn__head--nouveau::after{
+  content:""; display:block; height:22px; margin:16px 0 2px; width:210px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 210 24'%3E%3Cg fill='none' stroke='%23c1841a' stroke-width='1.5' stroke-linecap='round'%3E%3Cpath d='M105 12 C74 12 82 2 64 6 C51 9 60 19 44 14'/%3E%3Cpath d='M105 12 C136 12 128 2 146 6 C159 9 150 19 166 14'/%3E%3Cpath d='M44 14 q-7 -1 -12 -8'/%3E%3Cpath d='M166 14 q7 -1 12 -8'/%3E%3C/g%3E%3Ccircle cx='105' cy='12' r='2.6' fill='%23c1841a'/%3E%3C/svg%3E") no-repeat left center;
+}
+[data-theme="dark"] .learn__head--nouveau::after{ filter:brightness(1.25); }
+
+/* --- màn bạn đồng hành --- */
+.pet-scene{ max-width:640px; margin:0 auto 8px; }
+
+/* khung vòm kiểu cửa sổ Art Nouveau */
+.pet-arch{
+  position:relative; border-radius:190px 190px 20px 20px; overflow:hidden;
+  border:3px solid var(--ink);
+  box-shadow:0 0 0 4px var(--ochre) inset, 0 0 0 5px var(--paper) inset, var(--sh-2);
+  background:var(--ink);
+}
+/* vương miện lá ở đỉnh vòm */
+.pet-arch::before{
+  content:""; position:absolute; top:6px; left:50%; transform:translateX(-50%); z-index:3;
+  width:120px; height:34px; pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 34'%3E%3Cg fill='none' stroke='%23c1841a' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='M60 33 V10'/%3E%3Cpath d='M60 16 q-14 -3 -22 -14'/%3E%3Cpath d='M60 16 q14 -3 22 -14'/%3E%3Cpath d='M60 24 q-11 -2 -17 -10'/%3E%3Cpath d='M60 24 q11 -2 17 -10'/%3E%3C/g%3E%3Ccircle cx='60' cy='8' r='3' fill='%23c1841a'/%3E%3C/svg%3E") no-repeat center;
+}
+.pet-arch__sky{
+  position:relative; height:230px; overflow:hidden;
+  background:
+    radial-gradient(120px 120px at 22% 26%, rgba(246,251,251,.16), transparent 70%),
+    linear-gradient(180deg,#0b2a31 0%, #12707c 62%, #1f8a6b 100%);
+}
+.pet-moon{
+  position:absolute; top:30px; left:32px; width:40px; height:40px; border-radius:50%;
+  background:radial-gradient(circle at 38% 36%, #fdf6e6, #f0dfae);
+  box-shadow:0 0 0 6px rgba(246,251,251,.08), 0 0 26px rgba(246,240,214,.5);
+}
+.pet-star{ position:absolute; width:4px; height:4px; border-radius:50%; background:#f6f0d6; opacity:.85;
+  box-shadow:0 0 6px rgba(246,240,214,.9); animation:twinkle 3.4s ease-in-out infinite; }
+.pet-star:nth-child(3){ animation-delay:1.1s } .pet-star:nth-child(4){ animation-delay:2.2s }
+@keyframes twinkle{ 0%,100%{ opacity:.25; transform:scale(.7) } 50%{ opacity:.95; transform:scale(1) } }
+
+.pet-arch__ground{
+  position:relative; height:96px;
+  background:linear-gradient(180deg,#1f8a6b 0%, #12626c 100%);
+  border-top:2px solid var(--ochre);
+}
+/* dây leo mờ chạy dọc mép đất */
+.pet-arch__ground::before{
+  content:""; position:absolute; inset:0; opacity:.4; pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 40'%3E%3Cg fill='none' stroke='%23eafff6' stroke-width='1' stroke-linecap='round' opacity='.6'%3E%3Cpath d='M0 30 Q40 10 80 30 T160 30 T240 30 T320 30'/%3E%3C/g%3E%3C/svg%3E") repeat-x bottom;
+}
+.pet-walker{
+  position:absolute; bottom:70px; transform:translateX(-50%);
+  transition:left 1.1s cubic-bezier(.3,.7,.3,1); text-align:center; z-index:2;
+}
+.pet-crt{ display:block; margin:0 auto; filter:drop-shadow(0 6px 6px rgba(0,0,0,.28)); animation:walkbob 1.1s ease-in-out infinite; }
+.pet-legs{ transform-origin:75px 108px; animation:legsway 1.1s ease-in-out infinite; }
+.pet-name{
+  margin-top:-6px; font-family:var(--f-display); font-style:italic; font-size:.82rem; color:#f4fbf9;
+  text-shadow:0 1px 3px rgba(0,0,0,.5);
+}
+@keyframes walkbob{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-4px) } }
+@keyframes legsway{ 0%,100%{ transform:rotate(-4deg) } 50%{ transform:rotate(4deg) } }
+.pet-goal{
+  position:absolute; right:12px; bottom:70px; width:34px; height:34px; border-radius:50%;
+  display:grid; place-items:center; background:var(--paper); color:var(--ochre);
+  border:2px solid var(--ochre); box-shadow:0 3px 8px rgba(0,0,0,.3);
+}
+.pet-goal svg{ width:18px; height:18px; }
+
+.pet-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin:16px 0 6px; }
+.pet-stat{ text-align:center; padding:12px 6px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--sh-1); }
+.pet-stat b{ display:block; font-family:var(--f-display); font-size:1.5rem; font-weight:600; color:var(--euc-2); line-height:1; }
+.pet-stat span{ display:block; margin-top:5px; font-size:.68rem; letter-spacing:.02em; color:var(--ink-3); text-transform:uppercase; }
+.pet-goaltxt{ text-align:center; color:var(--ink-2); font-size:.94rem; margin:6px 0 4px; }
+.pet-goaltxt b{ color:var(--ochre); }
+.pet-rename{ text-align:center; margin-bottom:26px; }
+
+.pet-wardrobe{ display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:12px; }
+.pet-item{
+  position:relative; padding:14px 14px 16px; border-radius:var(--r-lg); cursor:pointer;
+  background:var(--surface); border:1px solid var(--line); box-shadow:var(--sh-1);
+  transition:transform .15s, border-color .15s, box-shadow .15s;
+}
+.pet-item:hover, .pet-item:focus-visible{ transform:translateY(-3px); border-color:var(--ochre); box-shadow:var(--sh-2); outline:none; }
+.pet-item:focus-visible{ box-shadow:0 0 0 3px var(--focus), var(--sh-2); }
+.pet-item__prev{ height:52px; display:grid; place-items:center; margin-bottom:8px; }
+.pet-item__prev svg{ color:var(--ink-3); }
+.pet-item.is-locked{ opacity:.62; cursor:not-allowed; }
+.pet-item.is-on{ border-color:var(--euc); box-shadow:0 0 0 2px var(--euc-soft), var(--sh-1); background:var(--euc-soft); }
+.pet-item__n{ font-family:var(--f-display); font-weight:600; font-size:1rem; }
+.pet-item__m{ font-size:.78rem; color:var(--ink-3); margin-top:2px; }
+.pet-badge{ display:inline-block; font-size:.7rem; font-weight:600; color:var(--euc-2); background:var(--paper); border:1px solid var(--euc); border-radius:100px; padding:1px 9px; }
+.pet-item__d{ font-size:.76rem; color:var(--ink-2); margin-top:8px; line-height:1.4; }
+
+/* callout "bản biên soạn tạm" trong trang chủ đề */
+.aw-note--draft{
+  display:flex; gap:12px; align-items:flex-start; margin:0 0 20px;
+  padding:14px 16px; border-radius:var(--r-lg);
+  background:var(--ochre-soft); border:1px solid var(--ochre); color:var(--ink);
+}
+.aw-note--draft svg{ width:20px; height:20px; color:var(--ochre); flex:none; margin-top:2px; }
+.aw-note--draft b{ color:var(--red-ink); }
+
+@media (max-width:560px){
+  .pet-stats{ grid-template-columns:repeat(2,1fr); }
+  .pet-arch__sky{ height:190px; } .pet-arch{ border-radius:150px 150px 18px 18px; }
+}
+@media (prefers-reduced-motion: reduce){
+  .pet-crt, .pet-legs, .pet-star{ animation:none; }
+  .pet-walker{ transition:none; }
+}
+
+/* ================================================================
+   34b. NHẬN XÉT KIỂU DOCS (gợi ý sửa + thanh nổi) + tên phần kiến thức
+   ================================================================ */
+.rv-topic{ display:inline-block; margin-top:8px; font-size:.76rem; font-weight:600; color:var(--link);
+  background:color-mix(in srgb, var(--link) 12%, transparent);
+  border:1px solid color-mix(in srgb, var(--link) 30%, transparent);
+  border-radius:100px; padding:3px 10px; }
+[data-theme="dark"] .rv-topic{ color:var(--link); }
+
+/* gợi ý sửa inline: gạch phần cũ + chèn phần mới khác màu */
+.cmt-del{ color:var(--red); text-decoration:line-through; text-decoration-thickness:1.6px; opacity:.85; }
+.cmt-ins{ color:var(--euc-2); font-weight:600; background:color-mix(in srgb, var(--euc) 15%, transparent); border-radius:2px; padding:0 2px; }
+[data-theme="dark"] .cmt-ins{ color:var(--euc); }
+.cmt-edit[data-cid]{ cursor:pointer; }
+.cmt-edit[data-cid]:hover .cmt-ins{ background:color-mix(in srgb, var(--euc) 28%, transparent); }
+.cmt-reader{ line-height:2; }
+
+/* thanh nổi bám vùng bôi đen */
+.cmt-float{ position:absolute; z-index:120; display:flex; gap:2px; padding:4px;
+  background:var(--ink); border-radius:100px; box-shadow:var(--sh-2); }
+.cmt-float button{ display:inline-flex; align-items:center; gap:5px; border:0; cursor:pointer;
+  background:transparent; color:#f4fbfb; font-family:var(--f-ui); font-weight:600; font-size:.8rem;
+  padding:6px 12px; border-radius:100px; }
+.cmt-float button:hover{ background:rgba(255,255,255,.15); }
+.cmt-float button svg{ width:14px; height:14px; }
+
+/* thẻ sửa trong sidebar + hộp thoại sửa */
+.cmt-card--edit{ border-left-color:var(--euc); }
+.cmt-card__edit{ font-size:.85rem; margin:2px 0 4px; }
+.cmt-card__edit del{ color:var(--red); }
+.cmt-card__edit b{ color:var(--euc-2); }
+.cmt-num--inline{ vertical-align:baseline; margin-right:5px; }
+.cmt-edit-orig{ font-size:.9rem; color:var(--ink-2); margin-bottom:12px; }
+.cmt-edit-orig del{ color:var(--red); }
+
 </style>
 </head>
 <body>
@@ -1616,6 +1782,7 @@ body::before{
   <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 12H3m0 0 4-4m-4 4 4 4"/></symbol>
   <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7-4-4-7 7-1 5z"/><path d="M15 8l1-1a2 2 0 0 1 3 3l-1 1"/></symbol>
   <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.5-1.5A4 4 0 0 1 17 18Z"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
 </svg>
 
 <a class="skip-link" href="#focus-anchor">Skip to content</a>
@@ -1760,6 +1927,7 @@ body::before{
             <span><a href="#" id="entry-mocks">Xem danh sách đề thi thử →</a></span>
             <span><a href="#" id="entry-own">Tự nhập đề &amp; nộp bài chấm riêng →</a></span>
             <span><a href="#" id="entry-learn">Vào Learn room học lý thuyết →</a></span>
+            <span><a href="#" id="entry-mine" hidden>Xem bài tôi đã làm trên máy này →</a></span>
             <span><a href="#" id="entry-account">Tài khoản của tôi (lưu lịch sử) →</a></span>
           </div>
         </div>
@@ -2519,7 +2687,7 @@ body::before{
   </div>
   <div class="sheet__body" style="align-items:flex-start">
     <div style="width:100%;max-width:900px;margin:0 auto">
-      <div class="learn__head"><span class="eyebrow">Khu vực của bạn</span><h1 id="hub-name">Học sinh</h1><p id="hub-sub"></p></div>
+      <div class="learn__head learn__head--nouveau"><span class="eyebrow">Khu vực của bạn</span><h1 id="hub-name">Học sinh</h1><p id="hub-sub"></p></div>
       <div class="hub-card" id="hub-auth" hidden>
         <h3 style="font-family:var(--f-display);margin-bottom:6px">Lưu lại tiến độ của bạn</h3>
         <p style="font-size:.9rem;color:var(--ink-2);margin-bottom:14px">Tạo tài khoản ngay trên web này — không cần Google, không cần cài gì.</p>
@@ -2533,6 +2701,7 @@ body::before{
         <button class="pick" id="hub-vocab" type="button"><span class="pick__ic"><svg aria-hidden="true"><use href="#i-award"></use></svg></span><div class="pick__t">Sổ từ vựng</div><div class="pick__d">Luyện trắc nghiệm &amp; điền khuyết</div></button>
         <button class="pick" id="hub-topics" type="button"><span class="pick__ic"><svg aria-hidden="true"><use href="#i-inbox"></use></svg></span><div class="pick__t">Topic-based examples</div><div class="pick__d">Ví dụ theo 8 chủ đề, dùng được ngay</div></button>
         <button class="pick" id="hub-ach" type="button"><span class="pick__ic"><svg aria-hidden="true"><use href="#i-award"></use></svg></span><div class="pick__t">Thành tích</div><div class="pick__d">XP, chuỗi ngày và huy hiệu</div></button>
+        <button class="pick" id="hub-pet" type="button"><span class="pick__ic"><svg aria-hidden="true"><use href="#i-clock"></use></svg></span><div class="pick__t">Bạn đồng hành</div><div class="pick__d">Nuôi thú cưng biết đi theo quãng đường học</div></button>
         <button class="pick" id="hub-lessons" type="button"><span class="pick__ic"><svg aria-hidden="true"><use href="#i-upload"></use></svg></span><div class="pick__t">Bài giảng của lớp</div><div class="pick__d">Bài giáo viên đăng — chữ, ảnh và video</div></button>
         <button class="pick" id="hub-samples" type="button"><span class="pick__ic"><svg aria-hidden="true"><use href="#i-file"></use></svg></span><div class="pick__t">Bài mẫu</div><div class="pick__d">30 bài mẫu theo chủ đề</div></button>
       </div>
@@ -2664,17 +2833,18 @@ body::before{
   </div>
   <div class="learn__body">
     <div class="learn__head"><span class="eyebrow">Nhận xét trong bài</span><h1 id="cmt-name">Bài làm</h1>
-      <p>Bôi đen đoạn bất kỳ trong bài rồi bấm <b>Thêm nhận xét</b> — giống như comment trong Google Docs. Học sinh sẽ thấy đúng đoạn đó kèm lời nhận xét của bạn.</p></div>
+      <p>Bôi đen đoạn bất kỳ — một thanh nhỏ hiện <b>ngay cạnh chỗ bôi</b> để thêm <b>Nhận xét</b> hoặc <b>Gợi ý sửa</b> (đổi chữ trực tiếp như Google Docs). Học sinh sẽ thấy đúng đoạn đó kèm chú thích.</p></div>
     <div class="cmt-bar">
       <div class="subtabs" role="tablist" style="margin:0">
         <button class="subtab" id="cmt-tab-1" role="tab" aria-selected="true" type="button">Task 1</button>
         <button class="subtab" id="cmt-tab-2" role="tab" aria-selected="false" type="button">Task 2</button>
       </div>
-      <button class="btn btn--red btn--sm" id="cmt-add" type="button"><svg aria-hidden="true"><use href="#i-edit"></use></svg> Thêm nhận xét</button>
+      <button class="btn btn--red btn--sm" id="cmt-add-note" type="button"><svg aria-hidden="true"><use href="#i-edit"></use></svg> Thêm nhận xét</button>
+      <button class="btn btn--sm" id="cmt-add-edit" type="button"><svg aria-hidden="true"><use href="#i-pen"></use></svg> Gợi ý sửa</button>
       <button class="btn btn--primary btn--sm" id="cmt-save" type="button"><svg aria-hidden="true"><use href="#i-save"></use></svg> Lưu tất cả</button>
       <span class="chip" id="cmt-count">0 nhận xét</span>
     </div>
-    <div class="cmt-hint">Mẹo: bôi đen bằng chuột (hoặc giữ và kéo trên điện thoại). Bấm vào vùng đã tô để nhảy tới nhận xét tương ứng.</div>
+    <div class="cmt-hint">Mẹo: bôi đen bằng chuột (hoặc giữ &amp; kéo trên điện thoại) → chọn <b>Nhận xét</b> hay <b>Gợi ý sửa</b> trên thanh nổi. Phần sửa hiện <span class="cmt-ins">chữ mới</span> khác màu và <del class="cmt-del">gạch phần cũ</del>. Bấm vào vùng đã tô để nhảy tới chú thích.</div>
     <div class="cmt-wrap">
       <div class="cmt-paper" id="cmt-essay"></div>
       <div class="cmt-side"><div id="cmt-list"></div></div>
@@ -2693,6 +2863,19 @@ body::before{
     <div class="learn__head"><span class="eyebrow">Tiến độ</span><h1>Thành tích của bạn</h1>
       <p>Mỗi hoạt động học đều cộng XP. Học đều mỗi ngày để giữ chuỗi và mở khoá huy hiệu.</p></div>
     <div id="ach-body"></div>
+  </div>
+</section>
+
+<!-- BẠN ĐỒNG HÀNH — thú cưng biết đi theo quãng đường học -->
+<section class="screen learn" id="screen-pet" hidden>
+  <div class="learn__nav">
+    <div style="display:flex;gap:8px;align-items:center"><button class="btn btn--sm btn--ghost" id="pet-back" type="button" style="color:#fff"><svg aria-hidden="true"><use href="#i-back"></use></svg> Quay lại</button></div>
+    <a class="wordmark wordmark--sm wordmark--light" href="#" data-home><span class="wordmark__glyph"><svg aria-hidden="true"><use href="#i-mark"></use></svg><span class="dot"></span></span><span class="wordmark__name">Echelon Prep</span></a>
+  </div>
+  <div class="learn__body">
+    <div class="learn__head learn__head--nouveau"><span class="eyebrow">Đường học</span><h1>Bạn đồng hành</h1>
+      <p>Mỗi việc bạn làm trên đây — nộp bài, đọc lý thuyết, luyện từ — đều đẩy bạn đồng hành đi thêm một quãng. <b>Quãng đường không bao giờ bị xoá.</b> Đi càng xa càng mở thêm phụ kiện để trang điểm cho nó.</p></div>
+    <div id="pet-body"></div>
   </div>
 </section>
 
@@ -3034,6 +3217,7 @@ const LS = {
   session:   "marq.session.v1",    // an in-progress exam on this device
   receipts:  "marq.receipts.v1",   // submissionId(s) this device has produced
   subsLocal: "marq.subs.v1",       // submissions (demo mode only)
+  mySubs:    "echelon.mysubs.v1",   // THIS student's own submissions on THIS device (works for guests too)
   theme:     "marq.theme",
   demoUser:  "marq.demoUser"
 };
@@ -3192,6 +3376,38 @@ const Receipts = {
   forCode(code){ return this.all()[String(code).toUpperCase()] || null; }
 };
 
+/* MyHistory: a light record of THIS device's own submissions, saved the
+   moment a student hands in — regardless of whether they made an account.
+   This is what lets every student reopen their past work even if they are
+   a guest, or if the cloud query is blocked by Firestore rules. Answers are
+   kept locally so a student can always re-read their essays offline; the
+   teacher's marks live in the cloud and are pulled fresh on open. */
+const MyHistory = {
+  list(){ return lsGet(LS.mySubs, []).slice().sort((a,b)=>(b.submittedAtMs||0)-(a.submittedAtMs||0)); },
+  record(id, sub){
+    if(!id) return;
+    const all = lsGet(LS.mySubs, []);
+    const row = {
+      id,
+      testTitle: sub.testTitle || sub.testCode || "Bài viết",
+      testCode:  sub.testCode || "",
+      submittedAtMs: sub.submittedAtMs || Date.now(),
+      wordCounts: sub.wordCounts || {},
+      studentUid: sub.studentUid || null,
+      candidate: { name: (sub.candidate&&sub.candidate.name)||"", cls:(sub.candidate&&sub.candidate.cls)||"" },
+      answers: sub.answers || {},
+      custom: !!sub.custom
+    };
+    const i = all.findIndex(x=>x.id===id);
+    if(i>=0) all[i] = Object.assign(all[i], row); else all.push(row);
+    // giữ 40 bài gần nhất để không phình localStorage
+    const trimmed = all.sort((a,b)=>(b.submittedAtMs||0)-(a.submittedAtMs||0)).slice(0,40);
+    lsSet(LS.mySubs, trimmed);
+  },
+  get(id){ return this.list().find(x=>x.id===id) || null; },
+  has(){ return this.list().length>0; }
+};
+
 /* Shared app state */
 const App = {
   screen: null,
@@ -3234,7 +3450,7 @@ function initTheme(){
 }
 
 /* ---- screen routing ---- */
-const SCREENS = ["screen-landing","screen-student-entry","screen-register","screen-auth","screen-setup","screen-exam","screen-result","screen-learn","screen-mocks","screen-own","screen-sauth","screen-hub","screen-phrases","screen-gate","screen-samples","screen-vocab","screen-lesson","screen-sample1","screen-comment","screen-ach","screen-topics"];
+const SCREENS = ["screen-landing","screen-student-entry","screen-register","screen-auth","screen-setup","screen-exam","screen-result","screen-learn","screen-mocks","screen-own","screen-sauth","screen-hub","screen-phrases","screen-gate","screen-samples","screen-vocab","screen-lesson","screen-sample1","screen-comment","screen-ach","screen-topics","screen-pet"];
 function show(id){
   SCREENS.forEach(s=>{ const el=$("#"+s); if(el) el.hidden = (s!==id); });
   const studio = $("#studio"); if(studio) studio.hidden = (id!=="studio");
@@ -3536,6 +3752,7 @@ async function finalize(auto){
   try{
     id = await Store.addSubmission(sub);
     Receipts.add(s.code, id);
+    MyHistory.record(id, sub);
   }catch(e){
     console.error("submit failed", e);
     // keep the session so the student can retry
@@ -3560,8 +3777,30 @@ async function finalize(auto){
    ================================================================ */
 function bandDisplay(v){ return (v==null||v==="")?"—":Number(v).toFixed(1); }
 
+/* Bảng "bài khác đã làm trên máy này" — hiện ở cuối màn kết quả, để BẤT KỲ
+   học sinh nào (kể cả khách) cũng mở lại được bài cũ mà không cần tài khoản. */
+function resultDeviceHistoryHTML(currentId){
+  const others = MyHistory.list().filter(r=>r.id!==currentId);
+  if(!others.length) return "";
+  return '<div class="section-title" style="margin-top:30px">Bài khác bạn đã làm trên máy này</div>'+
+    '<div class="table-wrap"><table class="table"><thead><tr><th>Đề</th><th>Nộp lúc</th><th class="num">Số từ</th><th></th></tr></thead><tbody>'+
+    others.map(s=>{
+      const w=(s.wordCounts&&((s.wordCounts["1"]||0)+(s.wordCounts["2"]||0)))||0;
+      return '<tr><td><b>'+esc(s.testTitle||s.testCode||"—")+'</b></td><td>'+esc(fmtWhen(s.submittedAtMs))+'</td>'+
+        '<td class="num">'+w+'</td>'+
+        '<td style="text-align:right"><button class="btn btn--sm" data-myopen="'+esc(s.id)+'">Xem</button></td></tr>';
+    }).join("")+'</tbody></table></div>';
+}
+function wireResultExtras(currentId){
+  $$("#result-body [data-myopen]").forEach(b=> on(b,"click",()=>{
+    const id=b.dataset.myopen; const row=MyHistory.get(id);
+    openMySubmission(id, row, App._resultFrom||"screen-entry");
+  }));
+}
+
 function renderResult(sub, justSubmitted){
   App.activeSub = sub;
+  if(justSubmitted) App._resultFrom = null;
   const body = $("#result-body");
   const fb = sub.feedback;
   const released = fb && fb.released;
@@ -3585,7 +3824,8 @@ function renderResult(sub, justSubmitted){
     html += resultMetaCard(sub);
     html += resultAnswers(sub);
     html += `<div id="review-mount"></div>`;
-    body.innerHTML = html; if(typeof mountReview==="function") mountReview(sub); show("screen-result"); return;
+    html += resultDeviceHistoryHTML(sub.id);
+    body.innerHTML = html; if(typeof mountReview==="function") mountReview(sub); wireResultExtras(sub.id); show("screen-result"); return;
   }
 
   // released feedback
@@ -3637,8 +3877,10 @@ function renderResult(sub, justSubmitted){
 
   html += resultAnswers(sub);
   html += `<div id="review-mount"></div>`;
+  html += resultDeviceHistoryHTML(sub.id);
   body.innerHTML = html;
   if(typeof mountReview==="function") mountReview(sub);
+  wireResultExtras(sub.id);
   show("screen-result");
 }
 function critMini(label, v){
@@ -3910,7 +4152,16 @@ function buildReport(sub){
     .filter(n=>n[1]).map(n=>`<div class="pr-h2">${esc(n[0])}</div><div class="pr-note">${esc(n[1])}</div>`).join("");
   const essays = ["1","2"].map(k=>{
     const a=(sub.answers&&sub.answers[k])||"";
-    return `<div class="pr-h2">Task ${k} — candidate's answer (${countWords(a)} words)</div><div class="pr-essay">${esc(a)||"—"}</div>`;
+    const marks = (Array.isArray(fb.inline)?fb.inline:[]).filter(c=>String(c.task)===String(k)).sort((x,y)=>x.start-y.start);
+    const body = annotateEssay(a, marks, {number:true});
+    const margin = marks.length ? marks.map((c,i)=>{
+      const head = c.kind==="edit"
+        ? '<b>Sửa:</b> <del>'+esc(c.quote.slice(0,60))+'</del> → <b>'+esc(c.replacement||"")+'</b>'
+        : '\u201C'+esc(c.quote.slice(0,60))+(c.quote.length>60?"\u2026":"")+'\u201D';
+      return '<div class="pr-cmt"><span class="pr-cmt__n">'+(i+1)+'</span><div class="pr-cmt__b">'+head+(c.note?'<div>'+esc(c.note)+'</div>':'')+'</div></div>';
+    }).join("") : '<div class="pr-cmt__empty">Không có nhận xét trong bài.</div>';
+    return `<div class="pr-h2">Task ${k} — candidate's answer (${countWords(a)} words)</div>
+      <div class="pr-annot"><div class="pr-annot__margin">${margin}</div><div class="pr-essay pr-essay--annot">${body||"—"}</div></div>`;
   }).join("");
   return `
     <div class="pr-head"><div><div class="pr-title">${esc(sub.testTitle||"Writing test")}</div><div class="pr-sub">Examiner feedback report</div></div>
@@ -4076,7 +4327,7 @@ async function wipeLocal(){
    WIRING
    ================================================================ */
 function home(){ if(typeof bootScreen==="function"){ bootScreen(); return; } goStudent(); }
-function goStudent(){ ensureDemoTest().then(()=>{ $("#code-error").hidden=true; $("#entry-code").value=""; show("screen-student-entry"); $("#entry-code").focus(); }); }
+function goStudent(){ ensureDemoTest().then(()=>{ $("#code-error").hidden=true; $("#entry-code").value=""; const em=$("#entry-mine"); if(em) em.hidden=!MyHistory.has(); show("screen-student-entry"); $("#entry-code").focus(); }); }
 function goTeacher(){ if(App.user){ openStudio(); } else { $("#auth-error").hidden=true; show("screen-auth"); $("#auth-email").focus(); } }
 function goSetup(){ show("screen-setup"); }
 
@@ -4170,7 +4421,11 @@ function wire(){
   on($("#dt-wipe"),"click",wipeLocal);
 
   // result
-  on($("#res-home"),"click",home);
+  on($("#res-home"),"click",()=>{
+    if(App._resultFrom==="screen-hub" && Student.user) openStudentHome();
+    else if(App._resultFrom==="screen-entry") goStudent();
+    else home();
+  });
   on($("#scripts-search"),"input",renderScripts);
 
   // global keys (exam)
@@ -4624,19 +4879,18 @@ function mountReview(sub){
   mount.innerHTML =
    '<div class="review">'+
      '<div class="review__head">'+
-       '<div class="review__intro"><h3>Review &amp; learn</h3>'+
-         '<p>Check your own writing for grammar, spelling and collocations, then study the points you missed. This is an automatic helper — your teacher\u2019s marking is the real assessment.</p></div>'+
+       '<div class="review__intro"><h3>Rà lỗi &amp; tự học</h3>'+
+         '<p>Công cụ tự động sẽ khoanh vùng chỗ nghi có lỗi ngữ pháp / chính tả và <b>gọi tên phần kiến thức</b> để bạn tự tra cứu. Nó không tự sửa hộ (tránh sửa sai). Bài chấm của giáo viên mới là đánh giá chính thức.</p></div>'+
        '<div class="review__tools">'+
          '<span class="review__toggle"><svg width="14" height="14" aria-hidden="true"><use href="#i-settings"></use></svg>'+
            '<select id="rv-dialect"><option value="en-US">American</option><option value="en-GB">British</option></select>'+
            '<label style="display:flex;align-items:center;gap:5px;cursor:pointer"><input type="checkbox" id="rv-online" style="width:15px;height:15px;accent-color:var(--slate)"> online</label></span>'+
-         '<button class="btn btn--sm" id="rv-learn"><svg aria-hidden="true"><use href="#i-award"></use></svg> Learn room</button>'+
        '</div>'+
      '</div>'+
      '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px">'+
        '<button class="btn btn--primary btn--sm" id="rv-t1"><svg aria-hidden="true"><use href="#i-check"></use></svg> Check Task 1</button>'+
        '<button class="btn btn--primary btn--sm" id="rv-t2"><svg aria-hidden="true"><use href="#i-check"></use></svg> Check Task 2</button>'+
-       '<span class="rv-note" style="align-self:center">Grammar &amp; spelling powered by LanguageTool.</span>'+
+       '<span class="rv-note" style="align-self:center">Rà ngữ pháp &amp; chính tả bằng LanguageTool.</span>'+
      '</div>'+
      '<div id="rv-out"><div id="rv-out-1"></div><div id="rv-out-2"></div></div>'+
      '<div class="reflect">'+
@@ -4659,7 +4913,6 @@ function mountReview(sub){
 
   on($("#rv-online"),"change",()=>{ const p = getCheckerPref(); p.online = $("#rv-online").checked; setCheckerPref(p); });
   on($("#rv-dialect"),"change",()=>{ const p = getCheckerPref(); p.dialect = $("#rv-dialect").value; setCheckerPref(p); });
-  on($("#rv-learn"),"click", openLearn);
   on($("#rv-t1"),"click",()=> runReview(sub, "1"));
   on($("#rv-t2"),"click",()=> runReview(sub, "2"));
   on($("#rv-reflect-save"),"click",()=>{
@@ -4680,6 +4933,25 @@ async function runReview(sub, task){
   box.innerHTML = html;
   bindCardButtons(box);
   const s = lsGet(reviewKey(sub), {}) || {}; s["t" + task + "html"] = html; lsSet(reviewKey(sub), s);
+}
+/* Đặt tên "phần kiến thức" cho mỗi lỗi để học sinh tự tra cứu — KHÔNG đưa ra
+   bản sửa tự động (tránh gợi ý sai kiểu essay→eessay). */
+function grammarTopic(it){
+  const cat = ((it.ltCat||"") + " " + (it.ltRule||"")).toLowerCase();
+  const msg = (it.message||"").toLowerCase();
+  const has = re => re.test(cat) || re.test(msg);
+  if(it.type==="spelling")     return "Chính tả — spelling";
+  if(it.type==="punct")        return "Dấu câu — punctuation";
+  if(it.type==="style")        return "Văn phong / thừa từ — style & redundancy";
+  if(it.type==="collocation")  return "Chọn từ & kết hợp từ — word choice / collocation";
+  if(has(/agreement|sva|subject|plural|singular|\bnumber\b/)) return "Hoà hợp chủ ngữ – động từ — subject-verb agreement";
+  if(has(/\bart[_\b]|\bdet\b|article|determiner/))           return "Mạo từ & từ hạn định — articles / determiners";
+  if(has(/tense|verb form|\bpast\b|present|participle|gerund/)) return "Thì & dạng động từ — verb tense / form";
+  if(has(/preposition/))       return "Giới từ — prepositions";
+  if(has(/repeat|duplicate/))  return "Lặp từ — repeated words";
+  if(has(/word form|part of speech|noun|adjective|adverb/))  return "Sai dạng từ — word form";
+  if(has(/comma|apostrophe/))  return "Dấu câu — punctuation";
+  return "Ngữ pháp — grammar";
 }
 function renderIssues(task, result){
   const order = [["grammar","Grammar"],["collocation","Collocation & word choice"],["spelling","Spelling"],["punct","Punctuation"],["style","Style"]];
@@ -4703,17 +4975,16 @@ function renderIssues(task, result){
     if(!items || !items.length) return;
     h += '<div class="rv-group"><div class="rv-group__title">' + esc(label) + ' <span class="n">' + items.length + '</span></div>';
     items.slice(0,12).forEach(it=>{
-      const snip = it.suggestion
-        ? '<span class="rv-item__snip"><span class="bad">' + esc(it.snippet) + '</span> \u2192 <span class="good">' + esc(it.suggestion) + '</span></span>'
-        : '<span class="rv-item__snip">' + esc(it.snippet) + '</span>';
-      h += '<div class="rv-item rv-item--' + type + '">' + snip +
-           '<div class="rv-item__msg">' + esc(it.message) + '</div>' +
-           (it.cardId ? '<div class="rv-item__learn"><button data-card="' + esc(it.cardId) + '"><svg width="13" height="13" aria-hidden="true"><use href="#i-award"></use></svg> Learn the rule</button></div>' : '') +
+      h += '<div class="rv-item rv-item--' + type + '">' +
+           '<span class="rv-item__snip">' + esc(it.snippet) + '</span>' +
+           '<span class="rv-topic">\uD83D\uDCD6 ' + esc(grammarTopic(it)) + '</span>' +
+           (it.message ? '<div class="rv-item__msg">' + esc(it.message) + '</div>' : '') +
            '</div>';
     });
     if(items.length > 12) h += '<p class="rv-note">\u2026and ' + (items.length - 12) + ' more of the same type.</p>';
     h += '</div>';
   });
+  h += '<p class="rv-note">Đây là công cụ tự động — nó chỉ <b>khoanh vùng chỗ nghi có lỗi và gọi tên phần kiến thức</b> để bạn tự tra cứu, không tự sửa hộ (nên có thể nhận nhầm). Bài chấm của giáo viên mới là đánh giá chính thức.</p>';
   if(result.note) h += '<p class="rv-note">' + esc(result.note) + '</p>';
   return h;
 }
@@ -6275,15 +6546,47 @@ const Student = {
     const cred = await fb.auth.signInWithEmailAndPassword(email.trim(), pw);
     return {uid:cred.user.uid, email:cred.user.email, name:cred.user.displayName||""};
   },
-  async myHistory(uid){
-    if(Store.mode!=="cloud"){
-      return lsGet(LS.subsLocal, []).filter(s=>s.studentUid===uid);
-    }
-    const qs = await fb.db.collection("submissions").where("studentUid","==",uid).get();
-    const rows=[]; qs.forEach(d=>{ const x=d.data(); x.id=d.id; rows.push(x); });
-    return rows.sort((a,b)=>(b.submittedAtMs||0)-(a.submittedAtMs||0));
+  async myHistory(user){
+    // 1) luôn có: lịch sử trên chính máy này (kể cả khách chưa đăng nhập)
+    const byId = {};
+    MyHistory.list().forEach(r=>{ byId[r.id] = Object.assign({_localOnly:true}, r); });
+    // 2) nếu đăng nhập + có đám mây: gộp thêm bản trên cloud (có điểm giáo viên chấm)
+    let cloudError = false;
+    const uid = user && user.uid;
+    try{
+      if(Store.mode==="cloud" && uid){
+        const qs = await fb.db.collection("submissions").where("studentUid","==",uid).get();
+        qs.forEach(d=>{ const x=d.data(); x.id=d.id;
+          x.submittedAtMs = x.submittedAtMs || (x.submittedAt&&x.submittedAt.toMillis? x.submittedAt.toMillis():0);
+          byId[x.id] = Object.assign({}, byId[x.id]||{}, x, {_localOnly:false});
+        });
+      }else if(Store.mode!=="cloud" && uid){
+        lsGet(LS.subsLocal, []).filter(s=>s.studentUid===uid).forEach(x=>{
+          byId[x.id] = Object.assign({}, byId[x.id]||{}, x, {_localOnly:false});
+        });
+      }
+    }catch(e){ console.error("cloud history failed", e); cloudError = true; }
+    const rows = Object.values(byId).sort((a,b)=>(b.submittedAtMs||0)-(a.submittedAtMs||0));
+    return { rows, cloudError };
   }
 };
+
+/* Mở lại một bài đã làm. Cố lấy bản mới nhất trên cloud (để thấy điểm giáo
+   viên vừa chấm); nếu không được thì dùng bản lưu trên máy — học sinh vẫn
+   đọc lại được bài viết của mình. */
+async function openMySubmission(id, fallbackRow, from){
+  App._resultFrom = from || "screen-hub";
+  let sub = fallbackRow ? Object.assign({}, fallbackRow) : null;
+  try{
+    if(Store.mode==="cloud" && id){
+      const fresh = await Store.getSubmission(id);
+      if(fresh) sub = Object.assign({}, fallbackRow||{}, fresh);
+    }
+  }catch(e){ /* giữ bản trên máy */ }
+  if(!sub){ toast("Không mở được bài này","warn"); return; }
+  if(!sub.id) sub.id = id;
+  renderResult(sub);
+}
 
 function isTeacherEmail(email){
   return !!(email && TEACHER_EMAIL && email.toLowerCase()===TEACHER_EMAIL.toLowerCase());
@@ -6322,27 +6625,33 @@ async function openStudentHome(){
   $("#hub-auth").hidden = !!u;
   $("#hub-signout").hidden = !u;
   const box = $("#hub-history");
-  if(!u){ box.innerHTML = '<p class="rv-note">Đăng nhập hoặc tạo tài khoản để xem lại toàn bộ bài đã làm và điểm số.</p>'; return; }
+  if(!u){ box.innerHTML = '<p class="rv-note">Đăng nhập hoặc tạo tài khoản để lưu và xem lại toàn bộ bài đã làm trên mọi thiết bị.</p>'; return; }
   box.innerHTML = '<div class="rv-loading"><span class="spin"></span> Đang tải lịch sử…</div>';
-  try{
-    const rows = await Student.myHistory(u.uid);
-    if(!rows.length){ box.innerHTML = '<p class="rv-note">Bạn chưa nộp bài nào. Chọn một đề để bắt đầu.</p>'; return; }
-    box.innerHTML = '<div class="table-wrap"><table class="table"><thead><tr><th>Đề</th><th>Nộp lúc</th><th class="num">Số từ</th><th>Trạng thái</th><th>Band</th><th></th></tr></thead><tbody>'+
-      rows.map(s=>{
-        const w=(s.wordCounts&&((s.wordCounts["1"]||0)+(s.wordCounts["2"]||0)))||0;
-        const marked = s.status==="marked" && s.feedback;
-        return '<tr><td><b>'+esc(s.testTitle||s.testCode||"—")+'</b></td><td>'+esc(fmtWhen(s.submittedAtMs))+'</td>'+
-          '<td class="num">'+w+'</td><td>'+(marked?'<span class="chip chip--euc chip--dot">Đã chấm</span>':'<span class="chip chip--ochre chip--dot">Chờ chấm</span>')+'</td>'+
-          '<td class="num"><b>'+(marked?bandDisplay(s.feedback.overallBand):"—")+'</b></td>'+
-          '<td style="text-align:right"><button class="btn btn--sm" data-open="'+esc(s.id)+'">Xem</button></td></tr>';
-      }).join("")+'</tbody></table></div>';
-    $$("#hub-history [data-open]").forEach(b=> on(b,"click",()=>{
-      const s = rows.find(x=>x.id===b.dataset.open); if(s) renderResult(s);
-    }));
-  }catch(e){
-    console.error(e);
-    box.innerHTML = '<p class="callout callout--warn">Chưa tải được lịch sử. Nếu lỗi lặp lại, có thể security rules chưa được cập nhật (xem hướng dẫn).</p>';
+  const { rows, cloudError } = await Student.myHistory(u);
+  if(!rows.length){
+    box.innerHTML = cloudError
+      ? '<p class="rv-note">Chưa tải được lịch sử trên máy chủ, và máy này chưa lưu bài nào. Nếu bạn từng nộp bài trên thiết bị khác, hãy kiểm tra kết nối rồi thử lại.</p>'
+      : '<p class="rv-note">Bạn chưa nộp bài nào. Chọn một đề để bắt đầu.</p>';
+    return;
   }
+  const note = cloudError
+    ? '<p class="callout callout--warn" style="margin-bottom:12px">Đang hiển thị các bài lưu trên máy này. Bản trên máy chủ (kèm điểm giáo viên) tạm thời chưa tải được — thử lại sau hoặc nhờ giáo viên cập nhật security rules.</p>'
+    : '';
+  box.innerHTML = note + '<div class="table-wrap"><table class="table"><thead><tr><th>Đề</th><th>Nộp lúc</th><th class="num">Số từ</th><th>Trạng thái</th><th>Band</th><th></th></tr></thead><tbody>'+
+    rows.map(s=>{
+      const w=(s.wordCounts&&((s.wordCounts["1"]||0)+(s.wordCounts["2"]||0)))||0;
+      const marked = s.status==="marked" && s.feedback;
+      const stat = marked ? '<span class="chip chip--euc chip--dot">Đã chấm</span>'
+                 : s._localOnly ? '<span class="chip chip--dot">Trên máy này</span>'
+                 : '<span class="chip chip--ochre chip--dot">Chờ chấm</span>';
+      return '<tr><td><b>'+esc(s.testTitle||s.testCode||"—")+'</b></td><td>'+esc(fmtWhen(s.submittedAtMs))+'</td>'+
+        '<td class="num">'+w+'</td><td>'+stat+'</td>'+
+        '<td class="num"><b>'+(marked?bandDisplay(s.feedback.overallBand):"—")+'</b></td>'+
+        '<td style="text-align:right"><button class="btn btn--sm" data-open="'+esc(s.id)+'">Xem</button></td></tr>';
+    }).join("")+'</tbody></table></div>';
+  $$("#hub-history [data-open]").forEach(b=> on(b,"click",()=>{
+    const s = rows.find(x=>x.id===b.dataset.open); openMySubmission(b.dataset.open, s, "screen-hub");
+  }));
 }
 
 /* ================================================================
@@ -6396,6 +6705,11 @@ function initV2(){
   /* student hub + accounts */
   on($("#entry-mocks"),"click", e=>{ e.preventDefault(); openMockPicker(); });
   on($("#entry-own"),"click", e=>{ e.preventDefault(); openOwnPrompt(); });
+  on($("#entry-mine"),"click", e=>{ e.preventDefault();
+    const rows = MyHistory.list();
+    if(!rows.length){ toast("Máy này chưa lưu bài nào","warn"); return; }
+    openMySubmission(rows[0].id, rows[0], "screen-entry");
+  });
   on($("#entry-account"),"click", e=>{ e.preventDefault(); show("screen-sauth"); });
   on($("#mocks-back"),"click", ()=> home());
   on($("#own-back"),"click", ()=> home());
@@ -8386,19 +8700,39 @@ function cmtLoad(sub){
 }
 function cmtForTask(t){ return cmtState.list.filter(c=>String(c.task)===String(t)).sort((a,b)=>a.start-b.start); }
 
-/* dựng lại đoạn văn có tô vùng đã comment */
-function cmtRenderEssay(text, task){
-  const marks = cmtForTask(task).filter(c=>c.start>=0 && c.end>c.start);
-  if(!marks.length) return esc(text).replace(/\n/g,"<br>");
-  let out="", pos=0;
-  marks.forEach(c=>{
-    if(c.start < pos) return;
-    out += esc(text.slice(pos, c.start)).replace(/\n/g,"<br>");
-    out += '<span class="cmt-span" data-cid="'+esc(c.id)+'">'+esc(text.slice(c.start,c.end)).replace(/\n/g,"<br>")+'</span>';
+/* Dựng đoạn văn có chú thích: gồm 2 loại — 'note' (nhận xét) và 'edit'
+   (gợi ý sửa trực tiếp: gạch ngang phần cũ + chèn phần mới khác màu, như
+   chế độ Suggesting của Google Docs). Dùng chung cho: màn chấm, màn học
+   sinh xem, và bản in. */
+function annotateEssay(text, marks, opts){
+  opts = opts || {};
+  const num = !!opts.number, marking = !!opts.marking;
+  const br = s => esc(s).replace(/\n/g,"<br>");
+  const list = (marks||[]).filter(c=>c.start>=0 && c.end>c.start).sort((a,b)=>a.start-b.start);
+  if(!list.length) return br(text);
+  let out="", pos=0, n=0;
+  list.forEach(c=>{
+    if(c.start < pos) return;                 // bỏ vùng chồng lấn
+    out += br(text.slice(pos, c.start));
+    n++;
+    const orig = text.slice(c.start, c.end);
+    const cid = marking ? ' data-cid="'+esc(c.id)+'"' : '';
+    const sup = num ? '<sup class="cmt-num">'+n+'</sup>' : '';
+    if(c.kind === "edit"){
+      out += '<span class="cmt-edit"'+cid+'><del class="cmt-del">'+br(orig)+'</del>'+
+             '<ins class="cmt-ins">'+br(c.replacement||"")+'</ins>'+sup+'</span>';
+    }else{
+      out += '<span class="cmt-span'+(marking?'':' cmt-span--st')+'"'+cid+'>'+br(orig)+sup+'</span>';
+    }
     pos = c.end;
   });
-  out += esc(text.slice(pos)).replace(/\n/g,"<br>");
+  out += br(text.slice(pos));
   return out;
+}
+
+/* dựng lại đoạn văn có tô vùng đã chú thích (màn chấm) */
+function cmtRenderEssay(text, task){
+  return annotateEssay(text, cmtForTask(task), {marking:true, number:true});
 }
 
 function cmtRender(sub){
@@ -8411,14 +8745,20 @@ function cmtRender(sub){
 
   const list = cmtForTask(t);
   const side = $("#cmt-list");
-  side.innerHTML = list.length ? list.map(c=>
-    '<div class="cmt-card" data-cid="'+esc(c.id)+'">'+
-      '<div class="cmt-card__q">“'+esc(c.quote.slice(0,90))+(c.quote.length>90?"…":"")+'”</div>'+
-      '<div class="cmt-card__b">'+esc(c.note)+'</div>'+
+  side.innerHTML = list.length ? list.map((c,i)=>{
+    const isEdit = c.kind==="edit";
+    const badge = isEdit
+      ? '<div class="cmt-card__edit"><del>'+esc(c.quote.slice(0,60))+'</del> → <b>'+esc(c.replacement||"")+'</b></div>' : '';
+    const body = c.note ? '<div class="cmt-card__b">'+esc(c.note)+'</div>'
+               : (isEdit ? '' : '<div class="cmt-card__b" style="color:var(--ink-3)">(chưa có ghi chú)</div>');
+    return '<div class="cmt-card'+(isEdit?' cmt-card--edit':'')+'" data-cid="'+esc(c.id)+'">'+
+      '<div class="cmt-card__q"><span class="cmt-num cmt-num--inline">'+(i+1)+'</span> \u201C'+esc(c.quote.slice(0,80))+(c.quote.length>80?"\u2026":"")+'\u201D</div>'+
+      badge + body +
       '<div class="cmt-card__a"><button class="lesson-link" data-edit="'+esc(c.id)+'">Sửa</button>'+
       '<button class="lesson-link" data-del="'+esc(c.id)+'" style="color:var(--red)">Xoá</button></div>'+
-    '</div>').join("") :
-    '<p class="rv-note">Chưa có nhận xét nào. Bôi đen một đoạn trong bài rồi bấm “Thêm nhận xét”.</p>';
+    '</div>';
+  }).join("") :
+    '<p class="rv-note">Chưa có nhận xét nào. Bôi đen một đoạn trong bài — thanh nhỏ sẽ hiện ngay cạnh chỗ bôi để thêm <b>nhận xét</b> hoặc <b>gợi ý sửa</b>.</p>';
 
   $$("#cmt-list [data-del]").forEach(b=> on(b,"click",()=>{
     cmtState.list = cmtState.list.filter(c=>c.id!==b.dataset.del);
@@ -8426,8 +8766,13 @@ function cmtRender(sub){
   }));
   $$("#cmt-list [data-edit]").forEach(b=> on(b,"click", async ()=>{
     const c = cmtState.list.find(x=>x.id===b.dataset.edit); if(!c) return;
-    const v = await cmtPrompt(c.note);
-    if(v!==null){ c.note = v; cmtRender(sub); }
+    if(c.kind==="edit"){
+      const r = await cmtEditPrompt(c.quote, c.replacement, c.note);
+      if(r){ c.replacement = r.replacement; c.note = r.note; cmtRender(sub); }
+    }else{
+      const v = await cmtPrompt(c.note);
+      if(v!==null){ c.note = v; cmtRender(sub); }
+    }
   }));
   $$("#cmt-list .cmt-card").forEach(card=> on(card,"click",()=>{
     const sp = $('.cmt-span[data-cid="'+card.dataset.cid+'"]', pane);
@@ -8471,14 +8816,85 @@ function cmtSelection(){
   return {start, end:start+quote.length, quote};
 }
 
-async function cmtAdd(sub){
+/* hộp thoại "gợi ý sửa trực tiếp" */
+function cmtEditPrompt(original, replacementInit, noteInit){
+  return new Promise(resolve=>{
+    dialog({title:"Gợi ý sửa trực tiếp", wide:false,
+      body:'<div class="cmt-edit-orig">Bản gốc: <del>'+esc(original)+'</del></div>'+
+           '<div class="field"><label class="label" for="cmt-rep">Sửa thành</label>'+
+           '<input class="input" id="cmt-rep" type="text" placeholder="ví dụ: reduction"></div>'+
+           '<div class="field"><label class="label" for="cmt-rep-note">Ghi chú <span class="opt">— tuỳ chọn</span></label>'+
+           '<input class="input" id="cmt-rep-note" type="text" placeholder="lý do / quy tắc, ví dụ: cần danh từ ở đây"></div>',
+      actions:[{label:"Huỷ", value:false},{label:"Lưu sửa", value:true, red:true}]
+    }).then(okv=>{
+      const rep=$("#cmt-rep",$("#dlg")), nt=$("#cmt-rep-note",$("#dlg"));
+      if(!okv){ resolve(null); return; }
+      resolve({ replacement: rep?rep.value.trim():"", note: nt?nt.value.trim():"" });
+    });
+    setTimeout(()=>{ const r=$("#cmt-rep",$("#dlg")); if(r){ r.value=replacementInit||""; r.focus(); r.select(); }
+                     const n=$("#cmt-rep-note",$("#dlg")); if(n) n.value=noteInit||""; }, 60);
+  });
+}
+
+/* thanh nổi bám theo vùng bôi đen (kiểu Google Docs) */
+let cmtFloatEl = null, cmtFloatWired = false;
+function cmtEnsureFloat(){
+  if(!cmtFloatEl){
+    const el = document.createElement("div");
+    el.className = "cmt-float"; el.id = "cmt-float"; el.hidden = true;
+    el.innerHTML =
+      '<button type="button" data-k="note"><svg aria-hidden="true"><use href="#i-edit"></use></svg> Nhận xét</button>'+
+      '<button type="button" data-k="edit"><svg aria-hidden="true"><use href="#i-pen"></use></svg> Gợi ý sửa</button>';
+    document.body.appendChild(el);
+    el.querySelectorAll("button").forEach(b=>{
+      on(b,"mousedown", e=> e.preventDefault());          // giữ nguyên vùng bôi đen
+      on(b,"click", ()=>{ if(App.activeSub) cmtAdd(App.activeSub, b.dataset.k); });
+    });
+    cmtFloatEl = el;
+  }
+  if(!cmtFloatWired){
+    document.addEventListener("selectionchange", cmtPositionFloat);
+    window.addEventListener("scroll", cmtPositionFloat, true);
+    window.addEventListener("resize", cmtPositionFloat);
+    cmtFloatWired = true;
+  }
+  return cmtFloatEl;
+}
+function cmtHideFloat(){ if(cmtFloatEl) cmtFloatEl.hidden = true; }
+function cmtPositionFloat(){
+  const pane = $("#cmt-essay");
+  if(!cmtFloatEl || !pane || App.screen!=="screen-comment"){ cmtHideFloat(); return; }
+  const sel = window.getSelection();
+  if(!sel || sel.isCollapsed || sel.rangeCount===0){ cmtHideFloat(); return; }
+  const range = sel.getRangeAt(0);
+  if(!pane.contains(range.commonAncestorContainer)){ cmtHideFloat(); return; }
+  const rect = range.getBoundingClientRect();
+  if(!rect || (!rect.width && !rect.height)){ cmtHideFloat(); return; }
+  const el = cmtFloatEl; el.hidden = false;
+  const w = el.offsetWidth||190, h = el.offsetHeight||40;
+  let left = window.scrollX + rect.left + rect.width/2 - w/2;
+  left = Math.max(8, Math.min(left, window.scrollX + document.documentElement.clientWidth - w - 8));
+  let top = window.scrollY + rect.top - h - 10;
+  if(top < window.scrollY + 4) top = window.scrollY + rect.bottom + 8;
+  el.style.left = left+"px"; el.style.top = top+"px";
+}
+
+async function cmtAdd(sub, kind){
+  kind = kind || "note";
   const s = cmtSelection();
   if(!s){ toast("Bôi đen một đoạn trong bài trước đã","warn",2600); return; }
   const overlap = cmtForTask(cmtState.task).some(c=> s.start < c.end && c.start < s.end);
-  if(overlap){ toast("Đoạn này đã có nhận xét — sửa nhận xét cũ thay vì thêm mới","warn",3200); return; }
-  const note = await cmtPrompt("");
-  if(note===null || !note) return;
-  cmtState.list.push({ id:uid(), task:cmtState.task, start:s.start, end:s.end, quote:s.quote, note:note, at:Date.now() });
+  if(overlap){ toast("Đoạn này đã có chú thích — sửa cái cũ thay vì thêm mới","warn",3200); return; }
+  cmtHideFloat();
+  if(kind==="edit"){
+    const r = await cmtEditPrompt(s.quote, s.quote, "");
+    if(!r || !r.replacement){ return; }
+    cmtState.list.push({ id:uid(), task:cmtState.task, kind:"edit", start:s.start, end:s.end, quote:s.quote, replacement:r.replacement, note:r.note||"", at:Date.now() });
+  }else{
+    const note = await cmtPrompt("");
+    if(note===null || !note) return;
+    cmtState.list.push({ id:uid(), task:cmtState.task, kind:"note", start:s.start, end:s.end, quote:s.quote, note:note, at:Date.now() });
+  }
   window.getSelection().removeAllRanges();
   cmtRender(sub);
 }
@@ -8486,6 +8902,7 @@ async function cmtAdd(sub){
 function cmtOpen(sub){
   cmtLoad(sub);
   cmtState.task = "1";
+  cmtEnsureFloat(); cmtHideFloat();
   show("screen-comment");
   $("#cmt-name").textContent = (sub.candidate && sub.candidate.name) || "Bài làm";
   $("#cmt-tab-1").setAttribute("aria-selected","true");
@@ -8504,24 +8921,22 @@ async function cmtSave(sub){
   finally{ btn.disabled = false; }
 }
 
-/* học sinh xem nhận xét trong bài của mình */
+/* học sinh xem nhận xét & sửa trong bài của mình */
 function studentInlineHTML(sub, task){
   const text = (sub.answers && sub.answers[task]) || "";
   const fb = sub.feedback || {};
   const marks = (Array.isArray(fb.inline)?fb.inline:[]).filter(c=>String(c.task)===String(task)).sort((a,b)=>a.start-b.start);
   if(!marks.length) return "";
-  let out="", pos=0;
-  marks.forEach((c,i)=>{
-    if(c.start<pos) return;
-    out += esc(text.slice(pos,c.start)).replace(/\n/g,"<br>");
-    out += '<span class="cmt-span cmt-span--st">'+esc(text.slice(c.start,c.end)).replace(/\n/g,"<br>")+
-           '<sup class="cmt-num">'+(i+1)+'</sup></span>';
-    pos = c.end;
-  });
-  out += esc(text.slice(pos)).replace(/\n/g,"<br>");
-  let notes = marks.map((c,i)=>'<div class="cmt-note"><span class="cmt-num">'+(i+1)+'</span><div><div class="cmt-note__q">“'+esc(c.quote.slice(0,90))+'”</div><div>'+esc(c.note)+'</div></div></div>').join("");
-  return '<div class="fb-note"><h3>Nhận xét chi tiết trong bài — Task '+task+'</h3>'+
-         '<div class="essay-block">'+out+'</div>'+
+  const body = annotateEssay(text, marks, {number:true});
+  const notes = marks.map((c,i)=>{
+    const head = c.kind==="edit"
+      ? '<div class="cmt-note__q">Sửa: <del>'+esc(c.quote.slice(0,80))+'</del> → <b>'+esc(c.replacement||"")+'</b></div>'
+      : '<div class="cmt-note__q">\u201C'+esc(c.quote.slice(0,90))+'\u201D</div>';
+    const txt = c.note ? '<div>'+esc(c.note)+'</div>' : '';
+    return '<div class="cmt-note"><span class="cmt-num">'+(i+1)+'</span><div>'+head+txt+'</div></div>';
+  }).join("");
+  return '<div class="fb-note"><h3>Nhận xét &amp; sửa trong bài — Task '+task+'</h3>'+
+         '<div class="essay-block cmt-reader">'+body+'</div>'+
          '<div class="cmt-notes">'+notes+'</div></div>';
 }
 
@@ -8573,11 +8988,12 @@ function syncThemeSwitches(){
    ================================================================ */
 function initV6(){
   // comment screen
-  on($("#cmt-back"),"click",()=>{ if(App.activeSub) { show("studio"); switchPane("mark"); } else show("studio"); });
-  on($("#cmt-add"),"click",()=>{ if(App.activeSub) cmtAdd(App.activeSub); });
+  on($("#cmt-back"),"click",()=>{ cmtHideFloat(); if(App.activeSub) { show("studio"); switchPane("mark"); } else show("studio"); });
+  on($("#cmt-add-note"),"click",()=>{ if(App.activeSub) cmtAdd(App.activeSub,"note"); });
+  on($("#cmt-add-edit"),"click",()=>{ if(App.activeSub) cmtAdd(App.activeSub,"edit"); });
   on($("#cmt-save"),"click",()=>{ if(App.activeSub) cmtSave(App.activeSub); });
-  on($("#cmt-tab-1"),"click",()=>{ cmtState.task="1"; $("#cmt-tab-1").setAttribute("aria-selected","true"); $("#cmt-tab-2").setAttribute("aria-selected","false"); if(App.activeSub) cmtRender(App.activeSub); });
-  on($("#cmt-tab-2"),"click",()=>{ cmtState.task="2"; $("#cmt-tab-2").setAttribute("aria-selected","true"); $("#cmt-tab-1").setAttribute("aria-selected","false"); if(App.activeSub) cmtRender(App.activeSub); });
+  on($("#cmt-tab-1"),"click",()=>{ cmtHideFloat(); cmtState.task="1"; $("#cmt-tab-1").setAttribute("aria-selected","true"); $("#cmt-tab-2").setAttribute("aria-selected","false"); if(App.activeSub) cmtRender(App.activeSub); });
+  on($("#cmt-tab-2"),"click",()=>{ cmtHideFloat(); cmtState.task="2"; $("#cmt-tab-2").setAttribute("aria-selected","true"); $("#cmt-tab-1").setAttribute("aria-selected","false"); if(App.activeSub) cmtRender(App.activeSub); });
   on($("#mk-comment"),"click",()=>{ if(App.activeSub) cmtOpen(App.activeSub); else toast("Chọn một bài để chấm trước","warn"); });
 
   flipNavs();
@@ -8859,7 +9275,7 @@ function renderGameBar(){
       '</div>'+
     '</div>';
 }
-function syncGameBar(){ try{ renderGameBar(); }catch(e){} }
+function syncGameBar(){ try{ renderGameBar(); }catch(e){} try{ if(App.screen==="screen-pet" && typeof renderPet==="function") renderPet(); }catch(e){} }
 
 function renderAchievements(){
   const g = gameState(); const box = $("#ach-body"); if(!box) return;
@@ -8882,6 +9298,176 @@ function renderAchievements(){
       '<div class="stat"><div class="stat__k">Câu từ vựng đúng</div><div class="stat__v">'+(g.counts.vocabRight||0)+'</div></div>'+
       '<div class="stat"><div class="stat__k">Cụm tự tô</div><div class="stat__v">'+(g.counts.highlight||0)+'</div></div>'+
     '</div>';
+}
+
+/* ================================================================
+   C2. BẠN ĐỒNG HÀNH — thú cưng biết đi theo quãng đường học
+   Lấy cảm hứng từ "Fatty mode" của arlts.org: một con vật đi dọc
+   khung tranh, quãng đường (mét) cộng dồn theo XP và KHÔNG bao giờ
+   reset. Đi tới các mốc thì mở khoá phụ kiện để đội / choàng.
+   Phong cách khung tranh: Art Nouveau (vòm cong, dây leo, trăng).
+   ================================================================ */
+const PET_KEY = "echelon.pet.v1";
+function petState(){
+  const p = lsGet(PET_KEY, null) || {};
+  return { name: p.name || "Sếu", equipped: p.equipped || {} };  // equipped: {slot:itemId}
+}
+function petSave(p){ lsSet(PET_KEY, p); }
+
+/* mét = XP cộng dồn (không bao giờ giảm) */
+function petMeters(){ return gameState().xp; }
+
+/* Tủ đồ — mỗi món mở ở một mốc mét. slot để không đội chồng lên nhau.
+   Mỗi món có hàm draw() trả về SVG phủ lên con vật. */
+const WARDROBE = [
+  {id:"laurel", slot:"head", name:"Vòng nguyệt quế", at:120,
+   note:"Lá ô-liu — phần thưởng đầu tiên cho người bền bỉ."},
+  {id:"scarf",  slot:"neck", name:"Khăn lụa", at:300,
+   note:"Một dải lụa mềm quấn quanh cổ."},
+  {id:"iris",   slot:"head", name:"Hoa diên vĩ", at:650,
+   note:"Bông iris — mô-típ Art Nouveau kinh điển."},
+  {id:"circlet",slot:"head", name:"Vương miện vàng", at:1100,
+   note:"Vòng kim tuyến mảnh, ánh marigold."},
+  {id:"plume",  slot:"back", name:"Lông công", at:1700,
+   note:"Chùm lông công xoè sau lưng — rất Mucha."},
+  {id:"cloak",  slot:"neck", name:"Áo choàng sao", at:2600,
+   note:"Áo choàng xanh mực điểm sao."},
+  {id:"halo",   slot:"back", name:"Hào quang mực", at:3800,
+   note:"Vầng sáng mực nước — dành cho bậc thầy."}
+];
+function petUnlocked(id){ const it = WARDROBE.find(w=>w.id===id); return it && petMeters() >= it.at; }
+function petNextUnlock(){ const m = petMeters(); return WARDROBE.filter(w=>w.at>m).sort((a,b)=>a.at-b.at)[0] || null; }
+
+/* ---- con vật (mèo/sếu cách điệu) + phụ kiện, vẽ bằng SVG line ---- */
+function petAccessorySVG(id){
+  switch(id){
+    case "laurel": return '<g stroke="#1f7a63" stroke-width="2.4" fill="none" stroke-linecap="round">'+
+      '<path d="M40 26 q14 -12 30 -3"/><path d="M120 26 q-14 -12 -30 -3"/>'+
+      '<path d="M46 20 q3 -5 8 -4"/><path d="M56 17 q3 -5 8 -4"/><path d="M114 20 q-3 -5 -8 -4"/><path d="M104 17 q-3 -5 -8 -4"/></g>';
+    case "iris": return '<g transform="translate(52,20)"><path d="M0 6 q-6 -10 0 -18 q6 8 0 18Z" fill="#7c4fb0"/>'+
+      '<path d="M0 6 q-11 -3 -12 -13 q9 2 12 13Z" fill="#9968c9"/><path d="M0 6 q11 -3 12 -13 q-9 2 -12 13Z" fill="#9968c9"/>'+
+      '<circle cx="0" cy="4" r="2.4" fill="#c1841a"/></g>';
+    case "circlet": return '<g fill="none" stroke="#c1841a" stroke-width="3"><path d="M42 24 q38 -14 76 0"/></g>'+
+      '<path d="M80 12 l4 8 l-4 8 l-4 -8Z" fill="#e6b64a"/>';
+    case "scarf": return '<g fill="#c02b4c"><path d="M58 70 q22 12 44 0 l-3 12 q-19 9 -38 0Z"/><path d="M96 80 l10 20 l-7 2 l-8 -18Z"/></g>';
+    case "cloak": return '<g fill="#10333b"><path d="M52 66 q28 16 56 0 l10 46 q-38 16 -76 0Z"/></g>'+
+      '<g fill="#e6b64a"><circle cx="66" cy="92" r="1.6"/><circle cx="84" cy="100" r="1.4"/><circle cx="98" cy="86" r="1.6"/><circle cx="76" cy="82" r="1.2"/></g>';
+    case "plume": return '<g transform="translate(112,64)" stroke="#12707c" stroke-width="2.2" fill="none">'+
+      '<path d="M0 0 q26 -6 40 -30"/><path d="M0 4 q30 2 46 -12"/><path d="M0 8 q28 10 44 6"/></g>'+
+      '<g fill="#1f7a63"><circle cx="40" cy="-30" r="4"/><circle cx="46" cy="-8" r="4"/><circle cx="44" cy="14" r="4"/></g>'+
+      '<g fill="#c1841a"><circle cx="40" cy="-30" r="1.6"/><circle cx="46" cy="-8" r="1.6"/><circle cx="44" cy="14" r="1.6"/></g>';
+    case "halo": return '<g fill="none" stroke="#12707c" stroke-width="2.6" opacity=".8"><circle cx="80" cy="30" r="30"/></g>'+
+      '<circle cx="80" cy="30" r="30" fill="none" stroke="#e6b64a" stroke-width="1" stroke-dasharray="2 6"/>';
+    default: return "";
+  }
+}
+/* con vật gốc — một chú mèo ngồi/đi cách điệu, nét mực */
+function petCreatureSVG(eq){
+  const back = (eq.back? petAccessorySVG(eq.back):"");
+  const head = (eq.head? petAccessorySVG(eq.head):"");
+  const neck = (eq.neck? petAccessorySVG(eq.neck):"");
+  return '<svg class="pet-crt" viewBox="0 0 160 150" width="128" height="120" aria-hidden="true">'+
+    back+
+    '<g class="pet-crt__body">'+
+      // đuôi
+      '<path d="M120 108 q34 -4 26 -40 q-2 -12 -12 -8 q10 6 6 20 q-4 16 -24 18Z" fill="#d99a4e"/>'+
+      // thân
+      '<path d="M46 112 q-8 -46 34 -50 q42 4 34 50 q-34 12 -68 0Z" fill="#e7a95a"/>'+
+      // bụng sáng
+      '<path d="M62 112 q-4 -30 18 -32 q22 2 18 32 q-18 8 -36 0Z" fill="#f2c988"/>'+
+      // đầu
+      '<circle cx="80" cy="58" r="30" fill="#e7a95a"/>'+
+      // tai
+      '<path d="M56 40 l-4 -22 l20 12Z" fill="#e7a95a"/><path d="M104 40 l4 -22 l-20 12Z" fill="#e7a95a"/>'+
+      '<path d="M57 37 l-1 -12 l10 7Z" fill="#c97f3a"/><path d="M103 37 l1 -12 l-10 7Z" fill="#c97f3a"/>'+
+      // mặt
+      '<circle cx="70" cy="56" r="3.2" fill="#123"/><circle cx="90" cy="56" r="3.2" fill="#123"/>'+
+      '<path d="M76 64 q4 4 8 0" fill="none" stroke="#123" stroke-width="2" stroke-linecap="round"/>'+
+      '<path d="M80 60 v4" stroke="#123" stroke-width="2" stroke-linecap="round"/>'+
+      // ria
+      '<g stroke="#c97f3a" stroke-width="1.4"><path d="M64 62 h-16"/><path d="M64 66 h-15"/><path d="M96 62 h16"/><path d="M96 66 h15"/></g>'+
+      // chân trước (đung đưa khi đi)
+      '<g class="pet-legs"><rect x="60" y="108" width="9" height="20" rx="4" fill="#d99a4e"/><rect x="90" y="108" width="9" height="20" rx="4" fill="#d99a4e"/></g>'+
+    '</g>'+
+    neck+head+
+  '</svg>';
+}
+
+function openPet(){ show("screen-pet"); renderPet(); }
+
+function renderPet(){
+  const box = $("#pet-body"); if(!box) return;
+  const g = gameState(); const m = petMeters(); const lv = levelOf(g.xp);
+  const p = petState();
+  const nxt = petNextUnlock();
+  const unlockedCount = WARDROBE.filter(w=>petMeters()>=w.at).length;
+
+  // vị trí con vật trên đường: tiến dần tới mốc kế tiếp (0..1)
+  let prog = 1, goalTxt = "Đã mở hết phụ kiện — cứ đi tiếp cho vui!";
+  if(nxt){
+    const prev = WARDROBE.filter(w=>w.at<=m).reduce((a,w)=>Math.max(a,w.at),0);
+    prog = Math.max(.04, Math.min(.96, (m-prev)/Math.max(1,(nxt.at-prev))));
+    goalTxt = "Còn <b>"+(nxt.at-m)+" m</b> nữa để mở <b>"+esc(nxt.name)+"</b>.";
+  }
+
+  const scene =
+    '<div class="pet-scene">'+
+      '<div class="pet-arch">'+
+        '<div class="pet-arch__sky"><span class="pet-moon"></span>'+
+          '<span class="pet-star" style="left:18%;top:22%"></span><span class="pet-star" style="left:70%;top:16%"></span><span class="pet-star" style="left:52%;top:30%"></span>'+
+        '</div>'+
+        '<div class="pet-arch__ground">'+
+          '<div class="pet-walker" style="left:'+Math.round(prog*100)+'%">'+ petCreatureSVG(p.equipped) +'<div class="pet-name">'+esc(p.name)+'</div></div>'+
+          (nxt? '<div class="pet-goal" title="'+esc(nxt.name)+'"><svg aria-hidden="true"><use href="#i-award"></use></svg></div>' : '')+
+        '</div>'+
+      '</div>'+
+      '<div class="pet-stats">'+
+        '<div class="pet-stat"><b>'+m+'</b><span>mét đã đi</span></div>'+
+        '<div class="pet-stat"><b>'+lv.level+'</b><span>cấp · '+esc(LEVEL_NAMES[lv.level]||"")+'</span></div>'+
+        '<div class="pet-stat"><b>'+(g.streak||0)+'</b><span>ngày liên tiếp</span></div>'+
+        '<div class="pet-stat"><b>'+unlockedCount+'/'+WARDROBE.length+'</b><span>phụ kiện đã mở</span></div>'+
+      '</div>'+
+      '<div class="pet-goaltxt">'+goalTxt+'</div>'+
+      '<div class="pet-rename"><button class="btn btn--sm btn--ghost" id="pet-rename" type="button"><svg aria-hidden="true"><use href="#i-pen"></use></svg> Đổi tên</button></div>'+
+    '</div>';
+
+  const shop = '<div class="section-title">Tủ đồ</div>'+
+    '<p class="aw-sub" style="margin:-4px 0 14px">Mỗi món mở ở một mốc quãng đường. Bấm để đội / cởi. Mỗi vị trí (đầu, cổ, lưng) đội một món.</p>'+
+    '<div class="pet-wardrobe">'+ WARDROBE.map(w=>{
+      const open = petMeters()>=w.at;
+      const on = p.equipped[w.slot]===w.id;
+      return '<div class="pet-item'+(open?"":" is-locked")+(on?" is-on":"")+'" data-item="'+w.id+'" role="button" tabindex="0" aria-pressed="'+(on?"true":"false")+'">'+
+        '<div class="pet-item__prev">'+ (open? '<svg viewBox="0 0 160 90" width="86" height="48" aria-hidden="true">'+petAccessorySVG(w.id).replace(/translate\(\d+,\d+\)/,'translate(50,40)')+'</svg>' : '<svg width="30" height="30" aria-hidden="true"><use href="#i-lock"></use></svg>') +'</div>'+
+        '<div class="pet-item__n">'+esc(w.name)+'</div>'+
+        '<div class="pet-item__m">'+ (open? (on? '<span class="pet-badge">Đang đội</span>' : 'Bấm để đội') : ('mở ở '+w.at+' m')) +'</div>'+
+        '<div class="pet-item__d">'+esc(w.note)+'</div>'+
+      '</div>';
+    }).join('')+'</div>';
+
+  box.innerHTML = scene + shop;
+
+  on($("#pet-rename"),"click", async ()=>{
+    const ok = await dialog({title:"Đặt tên cho bạn đồng hành", wide:false, body:
+      '<div class="field"><label class="label" for="pet-nm">Tên mới</label>'+
+      '<input class="input" id="pet-nm" type="text" maxlength="16" value="'+esc(p.name)+'"></div>',
+      actions:[{label:"Huỷ",value:false},{label:"Lưu",value:true,red:true}]});
+    if(!ok) return;
+    const nm = (($("#pet-nm",$("#dlg"))||{}).value||"").trim();
+    const st = petState(); st.name = nm || st.name; petSave(st); renderPet();
+  });
+
+  const toggleItem = (id)=>{
+    const w = WARDROBE.find(x=>x.id===id); if(!w) return;
+    if(petMeters()<w.at){ toast("Cần đi thêm "+(w.at-petMeters())+" m nữa mới mở được món này","warn",2600); return; }
+    const st = petState();
+    if(st.equipped[w.slot]===w.id) delete st.equipped[w.slot];   // cởi
+    else st.equipped[w.slot] = w.id;                              // đội
+    petSave(st); renderPet();
+  };
+  $$("#pet-body .pet-item").forEach(el=>{
+    on(el,"click",()=> toggleItem(el.dataset.item));
+    on(el,"keydown",(e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); toggleItem(el.dataset.item); } });
+  });
 }
 
 /* ================================================================
@@ -9280,9 +9866,112 @@ const AW_BANK = [
 },
 
 {
- id:"edu", name:"Giáo dục", en:"Education", country:"", icon:"i-file", pending:true,
- lede:"Phần này trong bộ AW2606 chưa có nội dung — giáo viên sẽ bổ sung quốc gia và các lập luận sau. Trong lúc chờ, dùng tạm các ví dụ ở tab “Ví dụ nhanh”.",
- facts:[], args:[], res:[]
+ id:"edu", name:"Giáo dục", en:"Education", country:"Phần Lan", icon:"i-file",
+ note:"Bộ AW2606 để trống phần Giáo dục (thẻ 6–10). Bản dưới đây do app biên soạn tạm theo <b>đúng chuỗi 5 bước</b> của giáo viên, lấy Phần Lan làm nước neo — dùng để học và luyện “viết lại với nước khác”. <b>Giáo viên nên duyệt / sửa lại</b> trước khi coi là tài liệu chính thức của lớp.",
+ lede:"Một nước Bắc Âu nhỏ nhưng liên tục được nhắc tới như hình mẫu giáo dục: học miễn phí, giáo viên được tuyển chọn kỹ và tôn trọng, ít thi cử áp lực, chú trọng công bằng. Phần Lan trả lời được cả đề khen (nhà nước nên đầu tư giáo dục) lẫn đề cân nhắc (mô hình có dễ sao chép không).",
+ facts:[
+  {h:"Bối cảnh", li:[
+    "Nước Bắc Âu, giáp Thuỵ Điển, Na Uy và Nga; thủ đô Helsinki.",
+    "Dân số khoảng 5,5 triệu, mức sống cao, nhà nước phúc lợi mạnh.",
+    "Ít tài nguyên thiên nhiên — coi giáo dục và con người là vốn chính."]},
+  {h:"Danh tiếng giáo dục", li:[
+    "Thường được lấy làm hình mẫu cho giáo dục phổ thông.",
+    "Từng nhiều lần đứng top trong khảo sát quốc tế PISA (đọc, toán, khoa học).",
+    "Nổi tiếng vì thu hẹp khoảng cách giữa học sinh giỏi và yếu.",
+    "Trường công chiếm gần như tuyệt đối; rất ít trường tư thu học phí."]},
+  {h:"Cách tổ chức", li:[
+    "Giáo dục cơ bản miễn phí, gồm cả bữa ăn học đường, sách và đi lại.",
+    "Bắt đầu học chính thức muộn (khoảng 7 tuổi), tuổi nhỏ học qua chơi.",
+    "Ít bài kiểm tra chuẩn hoá; kỳ thi lớn đầu tiên ở cuối bậc trung học.",
+    "Ngày học ngắn, ít bài tập về nhà hơn nhiều nước Đông Á."]},
+  {h:"Giáo viên", li:[
+    "Nghề giáo được xã hội tôn trọng, cạnh tranh đầu vào cao.",
+    "Giáo viên phổ thông thường phải có bằng thạc sĩ.",
+    "Được trao nhiều quyền tự chủ về cách dạy và chọn tài liệu."]},
+  {h:"Định hướng nghề & học suốt đời", li:[
+    "Luồng học nghề (vocational) được coi trọng ngang luồng hàn lâm.",
+    "Chú trọng học tập suốt đời và đào tạo lại người lớn.",
+    "Kết nối chặt giữa trường nghề và doanh nghiệp."]},
+  {h:"Mặt cần cân nhắc", li:[
+    "Mô hình gắn với dân số nhỏ, đồng đều và ngân sách phúc lợi lớn.",
+    "Không chắc sao chép nguyên xi sang nước đông dân, nhiều chênh lệch.",
+    "Chi phí công cho giáo dục cao, phụ thuộc mức thuế cao."]}
+ ],
+ args:[
+  {t:"Giáo dục miễn phí tạo cơ hội bình đẳng",
+   core:"Free public education widens access.",
+   vi:"Giáo dục công miễn phí giúp mọi tầng lớp có cơ hội học như nhau.",
+   argument:"Providing free, universally accessible education can reduce inequality between social groups.",
+   nouns:[["Free education","tuition-free schooling, subsidised meals and materials"],
+          ["Inequality","the gap between wealthy and low-income families"]],
+   example:"For instance, Finland offers tuition-free basic education and even provides free school meals, textbooks, and transport, so a child's opportunities depend far less on their parents' income.",
+   clarify:"By removing the financial barriers that usually decide who can attend a good school, the system allows talented students from poorer households to progress on merit rather than means.",
+   link:"This demonstrates how publicly funded education can act as a powerful equaliser across society."},
+
+  {t:"Chất lượng giáo viên quyết định chất lượng trường học",
+   core:"Well-trained teachers raise standards.",
+   vi:"Giáo viên được đào tạo tốt và tôn trọng thì cả hệ thống mạnh lên.",
+   argument:"Investing in the training and status of teachers is central to improving educational outcomes.",
+   nouns:[["Teacher quality","rigorous training, professional autonomy"],
+          ["Educational outcomes","student attainment, classroom engagement"]],
+   example:"For example, in Finland teaching is a highly respected profession that typically requires a master's degree, and teachers are trusted to design their own lessons rather than follow rigid scripts.",
+   clarify:"Because entry is competitive and teachers enjoy considerable autonomy, classrooms are led by skilled professionals who can adapt to the needs of individual learners.",
+   link:"This highlights how the calibre of teachers, more than any single policy, shapes the quality of an education system."},
+
+  {t:"Giảm thi cử áp lực giúp học sinh khoẻ mạnh hơn",
+   core:"Less high-stakes testing protects well-being.",
+   vi:"Bớt kỳ thi nặng nề giúp học sinh học sâu và bớt căng thẳng.",
+   argument:"Reducing reliance on high-stakes examinations can improve both learning and student well-being.",
+   nouns:[["High-stakes examinations","frequent standardised tests, ranking pressure"],
+          ["Well-being","lower stress, healthier motivation"]],
+   example:"For instance, Finnish schools largely avoid frequent standardised testing, with the first major national exam coming only at the end of upper-secondary school.",
+   clarify:"Without constant test preparation, teachers can focus on genuine understanding, and students experience far less of the anxiety associated with continuous ranking.",
+   link:"This suggests that easing examination pressure can support deeper learning rather than undermining it."},
+
+  {t:"Học qua chơi ở tuổi nhỏ tạo nền tảng vững",
+   core:"Play-based early years build strong foundations.",
+   vi:"Cho trẻ nhỏ học qua chơi tạo nền tảng lâu dài.",
+   argument:"A play-based approach in early childhood can lay a stronger foundation for later academic success.",
+   nouns:[["Early childhood education","kindergarten, play-based learning"],
+          ["Foundation","social skills, curiosity, basic literacy"]],
+   example:"For example, Finnish children begin formal schooling only at around the age of seven and spend their earliest years learning largely through structured play.",
+   clarify:"This allows young learners to develop social skills, curiosity, and self-regulation before the academic demands of later grades, rather than being pushed into rote learning too soon.",
+   link:"This illustrates how a gentler start can benefit children's long-term development."},
+
+  {t:"Học nghề đáng coi trọng ngang học hàn lâm",
+   core:"Vocational tracks deserve equal status.",
+   vi:"Không phải ai cũng cần đại học — học nghề cũng là con đường tốt.",
+   argument:"Treating vocational education as equal in status to academic study can better serve both students and the economy.",
+   nouns:[["Vocational education","trade and technical training, apprenticeships"],
+          ["The economy","skilled workforce, industries needing technicians"]],
+   example:"For instance, Finland offers a well-regarded vocational pathway alongside the academic one, with close links between technical colleges and employers.",
+   clarify:"Because skilled trades are respected rather than seen as a fallback, students who prefer practical work can build secure careers without being labelled as failures.",
+   link:"This demonstrates that valuing vocational routes can strengthen both individual prospects and the wider labour market."},
+
+  {t:"Giáo dục nuôi sức cạnh tranh của nền kinh tế",
+   core:"Education fuels a knowledge economy.",
+   vi:"Nước ít tài nguyên có thể đi lên nhờ đầu tư vào con người.",
+   argument:"Sustained investment in education can compensate for a lack of natural resources and drive national competitiveness.",
+   nouns:[["Investment in education","public funding, lifelong learning programmes"],
+          ["National competitiveness","innovation, a highly skilled workforce"]],
+   example:"For example, Finland, which has few natural resources, has built a prosperous economy largely on a highly educated population and a culture of lifelong learning.",
+   clarify:"By continuously upskilling both young people and adults, the country maintains a workforce capable of supporting innovation and high-value industries.",
+   link:"This shows how human capital, cultivated through education, can become a nation's most valuable resource."},
+
+  {t:"Mặt cần cân nhắc: mô hình khó sao chép nguyên xi",
+   core:"Successful models are hard to transplant.",
+   vi:"Một mô hình hay ở nước này chưa chắc bê nguyên sang nước khác được.",
+   argument:"Even highly successful education systems can be difficult to replicate in very different national contexts.",
+   nouns:[["A successful model","the Finnish approach, its funding and equity"],
+          ["Different contexts","larger, more unequal or lower-budget nations"]],
+   example:"For instance, Finland's system relies on a small, relatively equal population and high public spending, conditions that many larger or more diverse countries do not share.",
+   clarify:"Simply importing individual features, such as reduced testing, without the underlying investment and social equality may not produce the same results elsewhere.",
+   link:"This suggests that education reforms should be adapted to local conditions rather than copied wholesale."}
+ ],
+ res:["OECD — Education Policy Outlook: Finland",
+      "Finnish National Agency for Education (oph.fi)",
+      "PISA (OECD) country notes — Finland",
+      "This is Finland — Education"]
 }
 ];
 
@@ -9399,6 +10088,8 @@ function renderAwCountry(){
     return;
   }
 
+  const note = t.note ? '<div class="aw-note aw-note--draft"><svg aria-hidden="true"><use href="#i-alert"></use></svg><div>'+t.note+'</div></div>' : "";
+
   const facts = '<h2 class="aw-h">Kho dữ kiện nền</h2>'+
     '<p class="aw-sub">Đây là chất liệu thô. Khi viết, bạn rút ra một hai dữ kiện rồi biến thành câu ví dụ — đừng chép cả cụm vào bài.</p>'+
     '<div class="aw-facts">'+ t.facts.map(f=>
@@ -9412,7 +10103,7 @@ function renderAwCountry(){
   const res = t.res.length ? '<h2 class="aw-h">Tìm hiểu thêm</h2><ul class="aw-res">'+
     t.res.map(r=>"<li>"+esc(r)+"</li>").join("")+'</ul>' : "";
 
-  body.innerHTML = facts + args + res;
+  body.innerHTML = note + facts + args + res;
 
   on($("#tp-all"),"click",()=>{ awOpen=null; renderTopics(); window.scrollTo(0,0); });
   wireAwCountry(t);
@@ -9547,6 +10238,8 @@ function renderQuickTopic(){
 function initV7(){
   on($("#hub-ach"),"click",()=>{ show("screen-ach"); renderAchievements(); });
   on($("#ach-back"),"click",()=> openStudentHome());
+  on($("#hub-pet"),"click", openPet);
+  on($("#pet-back"),"click",()=> openStudentHome());
   on($("#hub-topics"),"click", openTopics);
   on($("#learn-topics"),"click", openTopics);
   on($("#tp-back"),"click",()=>{ if(App._topicFrom==="screen-learn") openLearn(); else openStudentHome(); });
